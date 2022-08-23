@@ -39,8 +39,8 @@ variable "ports" {
 variable "volume" {
   type = map(any)
   default = {
-    influxdb = []
-    grafana  = []
-    nodered  = []
+    influxdb = { vol1 = "/var/lib/influxdb" }
+    grafana  = { vol1 = "/var/lib/grafana", vol2 = "/etc/grafana" }
+    nodered  = { vol1 = "/data" }
   }
 }

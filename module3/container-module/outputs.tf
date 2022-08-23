@@ -1,3 +1,3 @@
-output "container-name"{
-    value="name"
+output "container-name" {
+  value = "name"
 }
