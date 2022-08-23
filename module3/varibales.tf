@@ -21,7 +21,7 @@ variable "ports" {
   type = map(any)
   default = {
     influxdb = {
-      dev  = { 8000 : 8086, 8001 : 8086, 8002 : 8086 }
+      dev  = { 8000 : 8086 }
       prod = { 9000 : 8086 }
     }
     grafana = {

@@ -8,7 +8,7 @@ resource "docker_container" "container-res" {
   for_each=var.ports_in
 
   image = var.image_in
-  name=random_string.string[each.key].result
+  name=join("-",[var.image_name_in, terraform.workspace,random_string.string[each.key].result])
 
   ports {
     external = each.key
