@@ -1,14 +1,12 @@
 module "image" {
-    source = "./image-module"
-    image_in = var.image[terraform.workspace]
+  source   = "./image-module"
+  for_each = var.images
+  image_in = each.value[terraform.workspace]
 }
 
-resource "docker_container" "container" {
-    name="container1"
-    image = module.image.image-name
-
-    ports {
-        external = 8080
-        internal =80
-    }
+module "container" {
+  source   = "./container-module"
+  for_each = var.ports
+  image_in = module.image[each.key]["image-name"]
+  ports_in = each.value[terraform.workspace]
 }
