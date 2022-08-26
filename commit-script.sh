@@ -3,4 +3,6 @@ ssh-agent bash -c "ssh-add ../id_rsa; git pull"
 git add .
 git commit -m "`date`"
 ssh-agent bash -c "ssh-add ../id_rsa; git push -u origin main"
-sleep 5
+
+echo "Done and dusted!"
+sleep 2
