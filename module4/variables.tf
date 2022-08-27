@@ -18,3 +18,8 @@ variable "private_sn_count" {
 variable "access_ip" {
   default = "0.0.0.0/0"
 }
+
+#database vars
+variable "dbname" {}
+variable "dbuser" { sensitive = true }
+variable "dbpassword" { sensitive = true }

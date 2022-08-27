@@ -16,3 +16,7 @@ variable "private_sn_count" {}
 variable "max_subnets" {}
 
 variable "security-grps" {}
+
+variable "db_subnet_gp_required" {
+  type = bool
+}

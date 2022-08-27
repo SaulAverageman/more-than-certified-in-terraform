@@ -31,4 +31,22 @@ module "vpc-subnets" {
 
   security-grps = local.sgs
 
+  db_subnet_gp_required = true
+
+}
+
+module "rds" {
+  source = "./rds-module"
+
+  db_storage        = 10
+  db_engine_version = "5.7.22"
+  db_instance_class = "db.t2.micro"
+  dbname            = var.dbname
+  dbuser            = var.dbuser
+  dbpassword        = var.dbpassword
+  db_identifier     = "mysql-db"
+  skip_db_snapshot  = true
+
+  db_subnet_group_name   = module.vpc-subnets.rds-subnet-grp-name
+  vpc_security_group_ids = module.vpc-subnets.private-sg
 }

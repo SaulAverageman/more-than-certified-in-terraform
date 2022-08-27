@@ -100,5 +100,14 @@ resource "aws_security_group" "sg-res" {
     cidr_blocks = ["0.0.0.0/0"]
 
   }
+}
 
+#RDS resources
+resource "aws_db_subnet_group" "rds-subnet-grp" {
+  count      = var.db_subnet_gp_required ? 1 : 0
+  name       = "rds-subnet-grp"
+  subnet_ids = aws_subnet.private-subnet-res.*.id
+  tags = {
+    "Name" = "rds-subnet-group"
+  }
 }
