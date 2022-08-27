@@ -2,11 +2,11 @@
 
 variable "vpc-cidr" {}
 variable "public-subnet-cidr" {
-  type = list
+  type = list(any)
 }
 
 variable "private-subnet-cidr" {
-  type = list
+  type = list(any)
 }
 
 variable "public_sn_count" {}
@@ -14,3 +14,5 @@ variable "public_sn_count" {}
 variable "private_sn_count" {}
 
 variable "max_subnets" {}
+
+variable "security-grps" {}

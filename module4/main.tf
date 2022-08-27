@@ -2,7 +2,8 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
+      version = "~> 4.20"
     }
   }
 
@@ -27,4 +28,7 @@ module "vpc-subnets" {
 
   public-subnet-cidr  = [for i in range(2, 255, 2) : cidrsubnet(var.vpc-cidr, 8, i)]
   private-subnet-cidr = [for i in range(1, 255, 2) : cidrsubnet(var.vpc-cidr, 8, i)]
+
+  security-grps = local.sgs
+
 }

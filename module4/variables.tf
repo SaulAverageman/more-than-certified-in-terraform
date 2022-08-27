@@ -14,3 +14,7 @@ variable "public_sn_count" {
 variable "private_sn_count" {
   default = 3
 }
+
+variable "access_ip" {
+  default = "0.0.0.0/0"
+}
