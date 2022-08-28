@@ -8,8 +8,8 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "dark-place-v33"
-    key    = ".terraform"
+    bucket = "dark-place-v666"
+    key    = "terraform.tfstate"
     region = "us-east-1"
   }
 }
@@ -59,7 +59,7 @@ module "alb" {
   public-subnets = module.vpc-subnets.public-subnets
   public-sg      = module.vpc-subnets.public-sg
 
-  tg-port                = 80
+  tg-port                = 8000
   tg-protocol            = "HTTP"
   vpc-id                 = module.vpc-subnets.vpc-id
   tg-healthy-threshold   = 2
@@ -67,6 +67,25 @@ module "alb" {
   tg-timeout             = 3
   tg-interval            = 30
 
-  listener-port     = 80
+  listener-port     = 8000
   listener-protocol = "HTTP"
+}
+
+#Compute module
+module "compute" {
+  source               = "./compute-module"
+  instance-count       = 2
+  instance-type        = "t3.micro"
+  instance-subnet-ids  = module.vpc-subnets.public-subnets
+  instance-sgs         = module.vpc-subnets.public-sg
+  instance-volume-size = 10
+
+  key-name = "dark-key"
+  key-path = "./ssh/dark-key.pub"
+
+  userdata-path = "./userdata.tpl"
+  dbuser=var.dbuser
+  dbpassword = var.dbpassword
+  dbname = var.dbname
+  db-endpoint = module.rds.rds-endpoint
 }

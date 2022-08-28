@@ -20,7 +20,7 @@ resource "aws_lb_target_group" "alb-tg-res" {
     interval            = var.tg-interval
   }
   lifecycle {
-    ignore_changes = [name]
+    ignore_changes        = [name]
     create_before_destroy = true
   }
 }
