@@ -23,3 +23,5 @@ variable "access_ip" {
 variable "dbname" {}
 variable "dbuser" { sensitive = true }
 variable "dbpassword" { sensitive = true }
+
+#ALB vars
