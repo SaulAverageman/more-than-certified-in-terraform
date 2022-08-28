@@ -23,15 +23,16 @@ resource "aws_instance" "node-res" {
   ami                    = data.aws_ami.instance-image.id
   subnet_id              = var.instance-subnet-ids[count.index]
   vpc_security_group_ids = var.instance-sgs
-  tags = {
-    "Name" = "node-${random_id.node-id[count.index].dec}"
-  }
+
   root_block_device {
     volume_size = var.instance-volume-size #10
   }
 
   #keypairs
   key_name = aws_key_pair.key-pair-res.id
+  tags = {
+    "Name" = "node-${random_id.node-id[count.index].dec}"
+  }
   user_data = templatefile(var.userdata-path,
   {
     nodename="node-${random_id.node-id[count.index].dec}"
