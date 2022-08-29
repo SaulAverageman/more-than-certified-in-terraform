@@ -13,3 +13,5 @@ variable "dbuser" {}
 variable "dbpassword" {}
 variable "db-endpoint" {}
 variable "dbname" {}
+
+variable "target-group-arn" {}

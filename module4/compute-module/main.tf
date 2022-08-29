@@ -34,18 +34,24 @@ resource "aws_instance" "node-res" {
     "Name" = "node-${random_id.node-id[count.index].dec}"
   }
   user_data = templatefile(var.userdata-path,
-  {
-    nodename="node-${random_id.node-id[count.index].dec}"
-    dbuser=var.dbuser
-    dbpass=var.dbpassword
-    db_endpoint=var.db-endpoint
-    dbname=var.dbname
-  }
+    {
+      nodename    = "node-${random_id.node-id[count.index].dec}"
+      dbuser      = var.dbuser
+      dbpass      = var.dbpassword
+      db_endpoint = var.db-endpoint
+      dbname      = var.dbname
+    }
   )
 }
 
 resource "aws_key_pair" "key-pair-res" {
   key_name   = var.key-name
   public_key = file(var.key-path)
+}
 
+resource "aws_lb_target_group_attachment" "lb-target-attachment" {
+  count            = var.instance-count
+  target_group_arn = var.target-group-arn
+  target_id        = aws_instance.node-res[count.index].id
+  port             = 8000
 }

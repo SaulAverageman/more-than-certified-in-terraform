@@ -67,7 +67,7 @@ module "alb" {
   tg-timeout             = 3
   tg-interval            = 30
 
-  listener-port     = 8000
+  listener-port     = 80
   listener-protocol = "HTTP"
 }
 
@@ -84,8 +84,10 @@ module "compute" {
   key-path = "./ssh/dark-key.pub"
 
   userdata-path = "./userdata.tpl"
-  dbuser=var.dbuser
-  dbpassword = var.dbpassword
-  dbname = var.dbname
-  db-endpoint = module.rds.rds-endpoint
+  dbuser        = var.dbuser
+  dbpassword    = var.dbpassword
+  dbname        = var.dbname
+  db-endpoint   = module.rds.rds-endpoint
+
+  target-group-arn = module.alb.target-group-arn
 }

@@ -14,7 +14,13 @@ locals {
           to       = 80
           from     = 80
           protocol = "tcp"
-          cidrs    = [var.access_ip]
+          cidrs    = [var.vpc-cidr] #[var.access_ip]
+        }
+        nginx = {
+          to       = 8000
+          from     = 8000
+          protocol = "tcp"
+          cidrs    = [var.vpc-cidr]
         }
 
       }
