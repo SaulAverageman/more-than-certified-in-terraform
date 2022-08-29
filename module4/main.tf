@@ -80,7 +80,7 @@ module "compute" {
   instance-sgs         = module.vpc-subnets.public-sg
   instance-volume-size = 10
 
-  key-name = "dark-key1"
+  key-name = "dark-key"
   key-path = "./ssh/dark-key.pub"
 
   userdata-path = "./userdata.tpl"
