@@ -8,7 +8,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "dark-place-v666"
+    bucket = "dark-place-v33"
     key    = "terraform.tfstate"
     region = "us-east-1"
   }
