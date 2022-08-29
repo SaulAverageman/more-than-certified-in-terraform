@@ -53,5 +53,5 @@ resource "aws_lb_target_group_attachment" "lb-target-attachment" {
   count            = var.instance-count
   target_group_arn = var.target-group-arn
   target_id        = aws_instance.node-res[count.index].id
-  port             = 8000
+  port             = var.tg-port
 }

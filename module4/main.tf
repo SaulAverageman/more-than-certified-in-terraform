@@ -74,7 +74,7 @@ module "alb" {
 #Compute module
 module "compute" {
   source               = "./compute-module"
-  instance-count       = 2
+  instance-count       = var.instance-count
   instance-type        = "t3.micro"
   instance-subnet-ids  = module.vpc-subnets.public-subnets
   instance-sgs         = module.vpc-subnets.public-sg
@@ -90,4 +90,5 @@ module "compute" {
   db-endpoint   = module.rds.rds-endpoint
 
   target-group-arn = module.alb.target-group-arn
+  tg-port          = 8000
 }

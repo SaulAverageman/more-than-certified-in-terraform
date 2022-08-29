@@ -15,3 +15,4 @@ variable "db-endpoint" {}
 variable "dbname" {}
 
 variable "target-group-arn" {}
+variable "tg-port" {}

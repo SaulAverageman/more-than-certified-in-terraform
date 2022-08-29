@@ -25,3 +25,8 @@ variable "dbuser" { sensitive = true }
 variable "dbpassword" { sensitive = true }
 
 #ALB vars
+
+#computr vars
+variable "instance-count" {
+  value = 2
+}
